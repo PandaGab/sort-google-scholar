@@ -9,13 +9,13 @@ class TestSortGS(unittest.TestCase):
     def setUpClass(self):
         '''run once before all tests'''
         os.system("python sortgs.py --debug --kw 'machine learning' --nresults 10")
-        self.df_top_10=pd.read_csv('machine_learning.csv')
+        self.df_top_10=pd.read_csv('examples/machine_learning.csv')
 
         os.system("python sortgs.py --debug --kw 'machine learning' --nresults 20")
-        self.df_top_20=pd.read_csv('machine_learning.csv')
+        self.df_top_20=pd.read_csv('examples/machine_learning.csv')
 
         os.system("python sortgs.py --debug --kw 'machine learning' --nresults 20 --sortby 'cit/year'")
-        self.df_top_sorted_cit_per_year=pd.read_csv('machine_learning.csv')
+        self.df_top_sorted_cit_per_year=pd.read_csv('examples/machine_learning.csv')
     
     def test_get_10_results(self):
         self.assertEqual(len(self.df_top_10), 12) # Two extra unwanted elements were captured
@@ -45,8 +45,8 @@ class TestSortGS(unittest.TestCase):
                                         [3077,  860,  713,  396,  345]])
 
     def test_csv_exists(self):
-        os.system("python sortgs.py --debug --kw 'machine learning' --nresults 10")
-        self.assertTrue(os.path.exists('machine_learning.csv'))
+        os.system("python -m sortgs --debug --kw 'machine learning' --nresults 10")
+        self.assertTrue(os.path.exists('examples/machine_learning.csv'))
 
 
 if __name__=='__main__':
